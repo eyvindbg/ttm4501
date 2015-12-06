@@ -181,4 +181,4 @@ fields = {
     'tcp.len'
 }
 
-register_script("Slow HTTP Headers", main, fields)
+register_script("DoS Detection/Slow HTTP Headers", main, fields)

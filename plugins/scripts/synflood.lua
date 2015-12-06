@@ -72,4 +72,4 @@ fields = {
     'ip.ttl'
 }
 
-register_script("TCP SYN Flood Detection", main, fields)
+register_script("DoS Detection/TCP SYN Flood", main, fields)

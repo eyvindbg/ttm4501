@@ -52,4 +52,4 @@ fields = {
     'tcp.analysis.acks_frame'
 }
 
-register_script("DoS Reflection-Amplification Detection", main, fields)
+register_script("DoS Detection/Reflection-Amplification", main, fields)

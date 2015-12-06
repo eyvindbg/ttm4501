@@ -77,21 +77,43 @@ function menu()
         if tap and tap.remove then tap:remove() end 
     end
 
-    tw:add_button("Extract\nRaw Data", function() retap_packets() tw:append("\n[-] Raw data was successfully extracted.\n") end)
-    tw:add_button("Run\nAnalysis", function() run_scripts() end)
-    tw:add_button("Generate\nReport", function() generate_report() tw:append("\n[-] Report generated.\n") end)
+    tw:add_button("Extract\nRaw Data", function()
+        local stopwatch = os.time()
+        tw:append("\n[-] Rescanning...\n")
+        retap_packets()
+        tw:append("\n[-] Raw data was successfully extracted. Time: " .. os.time() - stopwatch ..  " seconds.\n") 
+        end
+    )
+    
+    tw:add_button("Run\nAnalysis", 
+        function() 
+            run_scripts() 
+        end
+    )
+    
+    tw:add_button("Generate\nReport", 
+        function() 
+            generate_report() 
+            tw:append("\n[-] Report generated.\n") 
+        end
+    )
 
     tw:append("Registered Data Analysis Scripts: ")
     tw:append("\n---------------------------------\n")
     for name, main in pairs(scripts) do tw:append("[+] " .. name .. "\n") end
 
     function run_scripts()
-        tw:append("\nScript Execution Status: ")
+        local stopwatch = os.time()
+        
+        tw:append("\n\nScript Execution Status: ")
         tw:append("\n---------------------------------\n")
+        
         for name, exec in pairs(scripts) do
             local result = exec()
-            tw:append("[*] " .. name .. " was successfully executed.\n")
-        end    
+            tw:append("[*] " .. name .. " was successfully executed. Time: "  .. os.time() - stopwatch .. " seconds.\n")
+        end
+
+        tw:append("\nAll scripts executed successfully. Total time: " .. os.time() - stopwatch .. " seconds.\n")
     end
 
 end
